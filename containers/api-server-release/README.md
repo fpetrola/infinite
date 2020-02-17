@@ -1,7 +1,7 @@
 To expose host ip to docker
 
 ```
-HOS1T_IP=`ip -4 addr show scope global dev docker0 | grep inet | awk '{print \$2}' | cut -d / -f 1` \
+HOST_IP=`ip -4 addr show scope global dev docker0 | grep inet | awk '{print \$2}' | cut -d / -f 1` \
 docker run --add-host outside:$HOST_IP -p 3003:3003 -d \
 --name infinite-web-portal \
 --env POSTGRES_USER = $POSTGRES_USER \

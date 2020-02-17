@@ -1,0 +1,32 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:9.6.2-alpine'
+    expose:
+      - "5432"
+    environment:
+      - POSTGRES_USER="${POSTGRES_USER}"
+      - POSTGRES_PASSWORD="${POSTGRES_PASSWORD}"
+      - POSTGRES_DB="${POSTGRES_DB}"
+  api-server:
+    image: chriswininger/infinite-industries:api-server-staging
+    links:
+      - postgres
+    volumes:
+    - key-volume:/infinite/api-server/keys
+    environment:
+      - POSTGRES_USER = "${POSTGRES_USER}"
+      - POSTGRES_PW = "${POSTGRES_PW}"
+      - POSTGRES_HOST = "${POSTGRES_HOST}"
+      - POSTGRES_DB = "${POSTGRES_DB}"
+      - POSTGRES_PORT = "${POSTGRES_PORT}"
+      - SLACK_WEBHOOK_TEST = "${SLACK_WEBHOOK_TEST}"
+      - SLACK_WEBHOOK_CONTACT = "${SLACK_WEBHOOK_CONTACT}"
+      - SLACK_WEBHOOK_EVENT_SUBMISSION = "${SLACK_WEBHOOK_EVENT_SUBMISSION}"
+      - SLACK_WEBHOOK_VENUE_SUBMISSION = "${SLACK_WEBHOOK_VENUE_SUBMISSION}"
+      - BITLY_TOKEN = "${BITLY_TOKEN}"
+      - APP_URL = "${APP_URL}"
+    ports:
+    - "3003:3003"
+volumes:
+  key-volume="{$PRIVATE_KEY_PATH}"
