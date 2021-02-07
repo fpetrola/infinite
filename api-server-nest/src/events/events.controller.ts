@@ -29,9 +29,7 @@ export class EventsController {
         private readonly eventsService: EventsService,
         private readonly slackNotificationService: SlackNotificationService) {}
 
-
     @Get('verified')
-    @UseGuards(AuthGuard)
     @ApiOperation({summary: 'Get current events that have been verified (for public consumptions)'})
     @ApiResponse({
         status: 200,

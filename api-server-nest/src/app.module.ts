@@ -7,6 +7,7 @@ import {EventsModule} from "./events/events.module";
 import { ConfigModule } from '@nestjs/config';
 import {AnnouncementsModule} from "./announcements/announcements.module";
 import {UsersModules} from "./users/users.modules";
+import {CalendaringModule} from "./calendaring/calendaring.module";
 
 require('dotenv').config();
 
@@ -32,7 +33,8 @@ require('dotenv').config();
         CurrentEventsModule,
         EventsModule,
         AnnouncementsModule,
-        UsersModules
+        UsersModules,
+        CalendaringModule
     ],
     controllers: [AppController]
 })
